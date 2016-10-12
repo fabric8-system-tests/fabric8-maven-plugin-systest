@@ -1,4 +1,4 @@
-def podName = "buildpod.${env.JOB_NAME}.${env.BUILD_NUMBER}".replace('-', '_')
+def podName = "buildpod.${env.JOB_NAME}.${env.BUILD_NUMBER}".replace('-', '_').replace('/', '_')
 echo "using pod name ${podName}"
 podTemplate(label: podName, containers: [
     [name: 'maven', image: 'maven'], 
