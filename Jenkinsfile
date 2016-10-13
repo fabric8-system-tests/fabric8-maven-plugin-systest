@@ -8,7 +8,7 @@ podTemplate(label: podName, containers: [
       stage 'clone repo'
       git 'https://github.com/jenkinsci/kubernetes-plugin.git'
         
-      container(name: 'maven') {
+      container('maven') {
       stage 'build'
       sh 'mvn -BU clean install'
     }
