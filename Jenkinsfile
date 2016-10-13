@@ -2,7 +2,8 @@ def podName = "buildpod.${env.JOB_NAME}.${env.BUILD_NUMBER}".replace('-', '_').r
 echo "using pod name ${podName}"
 podTemplate(label: podName, containers: [
     [name: 'maven', image: 'maven', command: 'cat', ttyEnabled: true],
-    [name: 'jnlp', image: 'iocanel/jenkins-jnlp-client:latest', command:'/usr/local/bin/start.sh', args: '${computer.jnlpmac} ${computer.name}', ttyEnabled: false]
+    [name: 'jnlp', image: 'iocanel/jenkins-jnlp-client:latest', command:'/usr/local/bin/start.sh', args: '${computer.jnlpmac} ${computer.name}', ttyEnabled: false],
+    volumes: [[$class: 'PvcVolume', mountPath: '/root/.m2/repository', claimName: 'mvnRepo']]
   ]) {
   node (podName) {
       stage 'clone repo'
