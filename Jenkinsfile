@@ -10,7 +10,7 @@ podTemplate(label: podName, containers: [
         
       container(name: 'maven') {
       stage 'build'
-      sh 'mvn -BU clean install'
+      sh 'mvn -B -U clean install'
     }
   }
 }  
