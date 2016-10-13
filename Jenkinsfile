@@ -1,7 +1,7 @@
 def podName = "buildpod.${env.JOB_NAME}.${env.BUILD_NUMBER}".replace('-', '_').replace('/', '_')
 echo "using pod name ${podName}"
 podTemplate(label: podName, containers: [
-    [name: 'maven', image: 'maven'],
+    [name: 'maven', image: 'maven', command: 'cat', ttyEnabled: true],
     [name: 'jnlp', image: 'iocanel/jenkins-jnlp-client:latest', command:'/usr/local/bin/start.sh', args: '${computer.jnlpmac} ${computer.name}', ttyEnabled: false]
   ]) {
   node (podName) {
