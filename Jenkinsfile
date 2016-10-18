@@ -14,7 +14,6 @@ podTemplate(label: podName, containers: [
         
       container(name: 'maven') {
       stage 'build'
-      sh 'ls -al /root/.m2/repository'
       sh 'mvn -B -U clean install'
     }
   }
